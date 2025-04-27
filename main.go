@@ -7,7 +7,6 @@ import (
 
 func main() {
 	blockchain := blk.CreateBlockChainWithGenesisBlock()
-	fmt.Println(blockchain.Blocks[0])
 
 	blockchain.AddBlockToBlockChain("block1")
 	blockchain.AddBlockToBlockChain("block2")
@@ -16,6 +15,8 @@ func main() {
 
 	for _, block := range blockchain.Blocks {
 		fmt.Printf("Height: %d\n", block.Height)
+		fmt.Printf("Timestamp: %d\n", block.Timestamp)
+		fmt.Printf("Nonce: %d\n", block.Nonce)
 		fmt.Printf("Prev. hash: %x\n", block.PrevHash)
 		fmt.Printf("Data: %s\n", block.Data)
 		fmt.Printf("Hash: %x\n", block.Hash)
