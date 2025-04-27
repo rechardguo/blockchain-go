@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	block := blk.NewBlock(1, []byte{}, []byte("Genesis Block")) // Use the NewBlock function from the blk package
-	fmt.Println(block.Hash)
+	block := blk.CreateGenesisBlock("Genesis Block")
+	fmt.Println(block)
 
 }
