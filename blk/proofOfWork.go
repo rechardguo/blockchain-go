@@ -60,3 +60,10 @@ func (pow *ProofOfWork) Run() (int64, []byte) {
 	}
 	return nonce, hash
 }
+
+func (pow *ProofOfWork) Validate() bool {
+	hashInt := big.NewInt(0)
+	hash := pow.hash(pow.Block.Nonce)
+	hashInt.SetBytes(hash)
+	return hashInt.Cmp(pow.target) == -1
+}
