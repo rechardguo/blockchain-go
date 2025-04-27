@@ -1,6 +1,7 @@
 package main
 
 import (
+	"blockchain-go/blk"
 	"fmt"
 	"log"
 
@@ -25,15 +26,11 @@ func main() {
 	// 	fmt.Println()
 	// }
 
-	// block := blk.NewBlock(0, []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, []byte("Genesis block"))
-	// fmt.Printf("%x\n", block.Hash)
-	// fmt.Printf("%d\n", block.Nonce)
+	block := blk.NewBlock(0, []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, []byte("Genesis block"))
+	fmt.Printf("%x\n", block.Hash)
+	fmt.Printf("%d\n", block.Nonce)
 
-	// fmt.Println("--------------------------------")
-	// serializedData := block.Serialize()
-	// block2 := blk.DeserializeBlock(serializedData)
-	// fmt.Printf("%x\n", block2.Hash)
-	// fmt.Printf("%d\n", block2.Nonce)
+	serializedData := block.Serialize()
 
 	// Open the database
 	db, err := bbolt.Open("my.db", 0600, nil)
@@ -54,7 +51,7 @@ func main() {
 			}
 		}
 		// Put a key-value pair in the bucket
-		return b.Put([]byte("key"), []byte("value"))
+		return b.Put([]byte("key"), serializedData)
 	})
 
 	if err != nil {
@@ -69,7 +66,9 @@ func main() {
 		}
 
 		v := b.Get([]byte("key"))
-		fmt.Printf("Value: %s\n", v)
+		block2 := blk.DeserializeBlock(v)
+		fmt.Printf("%x\n", block2.Hash)
+		fmt.Printf("%d\n", block2.Nonce)
 		return nil
 	})
 
@@ -77,13 +76,4 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// Delete the key-value pair
-	err = db.Update(func(tx *bbolt.Tx) error {
-		b := tx.Bucket([]byte("MyBucket"))
-		if b == nil {
-			return fmt.Errorf("bucket not found")
-		}
-
-		return b.Delete([]byte("key"))
-	})
 }
