@@ -44,18 +44,15 @@ func main() {
 
 	// Start a writable transaction
 	err = db.Update(func(tx *bbolt.Tx) error {
-		var b *bbolt.Bucket
 		// Get a bucket
-		b = tx.Bucket([]byte("MyBucket"))
+		b := tx.Bucket([]byte("MyBucket"))
 		if b == nil {
 			// Create a bucket
-			bucket, err := tx.CreateBucket([]byte("MyBucket"))
+			b, err = tx.CreateBucket([]byte("MyBucket"))
 			if err != nil {
 				return err
 			}
-			b = bucket
 		}
-
 		// Put a key-value pair in the bucket
 		return b.Put([]byte("key"), []byte("value"))
 	})
