@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	block := blk.CreateGenesisBlock("Genesis Block")
-	fmt.Println(block)
+	block := blk.CreateBlockChainWithGenesisBlock()
+	fmt.Println(block.Blocks[0])
 
 }
