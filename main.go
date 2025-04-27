@@ -24,6 +24,12 @@ func main() {
 	// }
 
 	block := blk.NewBlock(0, []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, []byte("Genesis block"))
-	pow := blk.NewProofOfWork(block)
-	fmt.Printf("%t", pow.Validate())
+	fmt.Printf("%x\n", block.Hash)
+	fmt.Printf("%d\n", block.Nonce)
+
+	fmt.Println("--------------------------------")
+	serializedData := block.Serialize()
+	block2 := blk.DeserializeBlock(serializedData)
+	fmt.Printf("%x\n", block2.Hash)
+	fmt.Printf("%d\n", block2.Nonce)
 }

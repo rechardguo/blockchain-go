@@ -3,7 +3,6 @@ package blk
 import (
 	"bytes"
 	"crypto/sha256"
-	"fmt"
 	"math/big"
 )
 
@@ -47,7 +46,7 @@ func (pow *ProofOfWork) Run() (int64, []byte) {
 	for {
 		hash = pow.hash(nonce)
 		hashInt.SetBytes(hash)
-		fmt.Printf("\r%x\n", hashInt)
+		//fmt.Printf("\r%x\n", hashInt)
 		// pow.target=0000 0000 0000 0000 10..0
 		// hashInt 的范围可以是下面的范围
 		// hashInt   =0000 0000 0000 0000 01..1
