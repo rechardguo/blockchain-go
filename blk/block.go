@@ -7,6 +7,10 @@ import (
 	"time"
 )
 
+var (
+	GENESIS_BLOCK_HASH = []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+)
+
 type Block struct {
 	Height    int64
 	Hash      []byte
@@ -24,7 +28,7 @@ func NewBlock(height int64, prevHash []byte, data []byte) *Block {
 }
 
 func CreateGenesisBlock(data string) *Block {
-	return NewBlock(0, []byte{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, []byte(data))
+	return NewBlock(0, GENESIS_BLOCK_HASH, []byte(data))
 }
 
 func (b *Block) Serialize() []byte {
