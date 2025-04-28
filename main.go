@@ -1,13 +1,13 @@
 package main
 
 import (
-	"blockchain-go/blk"
+	"blockchain-go/BLK"
 	"fmt"
 	"time"
 )
 
 func main() {
-	blockchain := blk.CreateBlockChainWithGenesisBlock()
+	blockchain := BLK.CreateBlockChainWithGenesisBlock()
 
 	blockchain.AddBlockToBlockChain("block1")
 	blockchain.AddBlockToBlockChain("block2")

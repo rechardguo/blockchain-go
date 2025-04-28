@@ -1,4 +1,4 @@
-package blk
+package BLK
 
 import (
 	"log"
