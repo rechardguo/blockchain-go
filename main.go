@@ -3,6 +3,7 @@ package main
 import (
 	"blockchain-go/blk"
 	"fmt"
+	"time"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 			break
 		}
 		fmt.Printf("Height: %d\n", block.Height)
-		fmt.Printf("Timestamp: %d\n", block.Timestamp)
+		fmt.Printf("Timestamp: %s\n", time.Unix(block.Timestamp, 0).Format(("2006-01-01  15:04:05")))
 		fmt.Printf("Nonce: %d\n", block.Nonce)
 		fmt.Printf("Prev. hash: %x\n", block.PrevHash)
 		fmt.Printf("Data: %s\n", block.Data)
